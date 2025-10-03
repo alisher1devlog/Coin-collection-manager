@@ -1,0 +1,1 @@
+// trades table model

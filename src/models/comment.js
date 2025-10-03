@@ -1,0 +1,1 @@
+// comments table model

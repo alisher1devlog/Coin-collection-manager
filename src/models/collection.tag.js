@@ -1,0 +1,1 @@
+// collection_tags table model

@@ -1,0 +1,1 @@
+// ollection_coins table model

@@ -1,0 +1,1 @@
+// collections table model
