@@ -1,1 +1,82 @@
 -- # Database migration fayllar
+
+CREATE TABLE users(
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(120) NOT NULL,
+    email VARCHAR(120) NOT NULL UNIQUE,
+    password VARCHAR(120) NOT  NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE collections(
+    id SERIAL PRIMARY KEY,
+    user_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    title VARCHAR(150) NOT NULL,
+    description VARCHAR(120),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    image VARCHAR(120) NOT NULL
+);
+
+
+
+CREATE TABLE coins(
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(120) NOT NULL,
+    country VARCHAR(120) NOT NULL,
+    year INT NOT NULL,
+    material VARCHAR(120),
+    value INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    image VARCHAR(120)
+);
+
+
+CREATE TABLE collection_coins(
+    id SERIAL PRIMARY KEY,
+    collection_id INT NOT NULL REFERENCES collections(id) ON DELETE CASCADE,
+    coin_id INT NOT NULL REFERENCES coins(id) ON DELETE CASCADE,
+    condition VARCHAR(120) NOT NULL,
+    note TEXT NOT  NULL,
+    added_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE trades(
+    id SERIAL PRIMARY KEY,
+    from_user_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    to_user_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    coin_id INT NOT NULL REFERENCES coins(id) ON DELETE CASCADE,
+    status VARCHAR(150),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+
+CREATE TABLE comments(
+    id SERIAL PRIMARY KEY,
+    collection_id INT NOT NULL REFERENCES collections(id) ON DELETE CASCADE,
+    user_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    text TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE tags(
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(120) NOT NULL UNIQUE
+);
+
+
+
+CREATE TABLE collection_tags(
+    id SERIAL PRIMARY KEY,
+    collection_id INT NOT NULL REFERENCES collections(id) ON DELETE CASCADE,
+    tag_id INT NOT NULL REFERENCES tags(id) ON DELETE CASCADE
+);
+
+
+
