@@ -1,8 +1,7 @@
 // server uchun
 import express from "express"
 import * as routes from "./src/routes/index.js"
-import { userRouter } from "./src/routes/user.routes.js"
-import { CollectionRouter } from "./src/routes/collection.routes.js"
+
 
 
 const app=express()
@@ -15,8 +14,6 @@ app.use("/coins",routes.coinsRouter)
 app.use("/collections/:id/coins",routes.collection_coinsRouter)
 app.use("/collection_coins",routes.collectionCoinsRouter)
 app.use("/trades",routes.tradeRoutes)
-app.use("/users",userRouter)
-app.use("/collections",CollectionRouter)
 
 
 app.listen(PORT,()=>{
