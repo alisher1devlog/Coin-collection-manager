@@ -1,11 +1,14 @@
 -- Active: 1759236939102@@127.0.0.1@5432@odamlar
 -- # Database migration fayllar
 
+
+
+
 CREATE TABLE users(
     id SERIAL PRIMARY KEY,
-    name VARCHAR(120) NOT NULL,
+    name VARCHAR(150) NOT NULL,
     email VARCHAR(120) NOT NULL UNIQUE,
-    password VARCHAR(120) NOT  NULL,
+    password VARCHAR(120) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -14,25 +17,23 @@ CREATE TABLE users(
 CREATE TABLE collections(
     id SERIAL PRIMARY KEY,
     user_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    title VARCHAR(150) NOT NULL,
-    description VARCHAR(120),
+    title VARCHAR(120) NOT NULL,
+    description VARCHAR(120) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     image VARCHAR(120) NOT NULL
 );
-
-
 
 CREATE TABLE coins(
     id SERIAL PRIMARY KEY,
     name VARCHAR(120) NOT NULL,
     country VARCHAR(120) NOT NULL,
     year INT NOT NULL,
-    material VARCHAR(120),
-    value INT,
+    material VARCHAR(120) NOT NULL,
+    value INT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    image VARCHAR(120)
+    image VARCHAR(120) NOT NULL
 );
 
 
@@ -41,7 +42,7 @@ CREATE TABLE collection_coins(
     collection_id INT NOT NULL REFERENCES collections(id) ON DELETE CASCADE,
     coin_id INT NOT NULL REFERENCES coins(id) ON DELETE CASCADE,
     condition VARCHAR(120) NOT NULL,
-    note TEXT NOT  NULL,
+    note TEXT NOT NULL,
     added_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -51,7 +52,7 @@ CREATE TABLE trades(
     from_user_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     to_user_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     coin_id INT NOT NULL REFERENCES coins(id) ON DELETE CASCADE,
-    status VARCHAR(150),
+    status VARCHAR(120) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -61,7 +62,7 @@ CREATE TABLE comments(
     id SERIAL PRIMARY KEY,
     collection_id INT NOT NULL REFERENCES collections(id) ON DELETE CASCADE,
     user_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    text TEXT,
+    text TEXT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -78,6 +79,5 @@ CREATE TABLE collection_tags(
     collection_id INT NOT NULL REFERENCES collections(id) ON DELETE CASCADE,
     tag_id INT NOT NULL REFERENCES tags(id) ON DELETE CASCADE
 );
-
 
 

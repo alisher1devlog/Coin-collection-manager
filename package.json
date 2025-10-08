@@ -1,11 +1,28 @@
 {
   "dependencies": {
     "express": "^5.1.0",
+    "morgan": "^1.10.1",
+    "package.json": "^2.0.1",
     "pg": "^8.16.3"
   },
-  "type": "module",
+  "name": "coin-collection-manager",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev":"node --watch server.js"
-  }
+    "dev": "node --watch server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alisher1devlog/Coin-collection-manager.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/alisher1devlog/Coin-collection-manager/issues"
+  },
+  "homepage": "https://github.com/alisher1devlog/Coin-collection-manager#readme"
 }
