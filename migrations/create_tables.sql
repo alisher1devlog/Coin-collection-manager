@@ -1,3 +1,4 @@
+-- Active: 1759236939102@@127.0.0.1@5432@odamlar
 -- # Database migration fayllar
 
 CREATE TABLE users(
